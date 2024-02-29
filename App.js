@@ -2,20 +2,14 @@ import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import {
   StyleSheet,
-  View,
-  Button,
+  SafeAreaView,
 } from "react-native";
-import PressableVsButton from "./Components/PressableVsButton";
-import SimpleScrollView from "./Components/SimpleScrollView";
-import SimpleFlatList from "./Components/SimpleFlatList";
+import Todo from "./Components/Todo";
 
 export default function App() {
-  const compArray = [PressableVsButton, SimpleScrollView, SimpleFlatList];
-  const [visibleComponent, setVisibleComponent] = useState(0);
-  const Comp = compArray[visibleComponent];
   return (
-    <View style={styles.container}>
-      <View style={styles.sideBySide}>
+    <SafeAreaView style={styles.container}>
+      {/* <View style={styles.sideBySide}>
         <Button
           title="previous component"
           onPress={() =>
@@ -31,9 +25,10 @@ export default function App() {
       </View>
       <View style={styles.component}>
         <Comp />
-      </View>
+      </View> */}
+      <Todo/>
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -45,7 +40,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   component:{
-    flex: 0.9
+    flex: 0.9,
+    padding:2
   },
   text: {
     fontSize: 14,

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import lemon from "../assets/lemon.png";
 import mango from "../assets/mango.png";
-// import Item from './Item';
+import Item from './Item';
 
 const DATA = [
     { text: "1234", icon: lemon },
@@ -24,11 +24,11 @@ const DATA = [
     { text: "watermelon", icon: lemon },    
 ];
 
-const Item = ({text}) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{text}</Text>
-  </View>
-);
+// const Item = ({text}) => (
+//   <View style={styles.item}>
+//     <Text style={styles.title}>{text}</Text>
+//   </View>
+// );
 
 export default function SimpleFlatList() {
   return (
