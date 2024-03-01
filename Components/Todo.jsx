@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet, Text, TextInput, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import lemon from "../assets/lemon.png";
 import mango from "../assets/mango.png";
 import Item from "./Item";
@@ -10,16 +10,32 @@ export default Todo = () => {
     { text: "lemon", icon: mango },
     { text: "mango", icon: lemon },
   ];
+  const icons = [mango, lemon];
+  const [text, setText] = useState("");
+  const [items, setItems] = useState(DATA);
+  const [iconIndex, setIconIndex] = useState(0);
+  const addItem = () => {
+    // items.push({text:text});
+    setItems([...items, { text: text, icon: icons[iconIndex] }]);
+    setIconIndex((iconIndex + 1) % 2);
+  };
+  const deleteItem = (index) => {
+    setItems(items.filter((_, i) => i !== index));
+  };
   return (
     <View style={styles.top}>
       <View style={styles.top1}>
-        {/* <Text>Enter text</Text> */}
+        {/* <Text>{text}</Text> */}
         <View style={styles.sideBySide}>
-          <TextInput placeholder="Enter text" />
-          <MyButton color="red">
+          <TextInput
+            style={styles.input}
+            placeholder="Enter text"
+            onChangeText={(t) => setText(t)}
+          />
+          <MyButton color="red" onPress={addItem}>
             {({ pressed }) => (
               <Text style={styles.text}>
-                {pressed ? "Pressed!" : "Click here"}
+                {pressed ? "Adding" : "Add item"}
               </Text>
             )}
           </MyButton>
@@ -27,9 +43,9 @@ export default Todo = () => {
       </View>
       <FlatList
         style={styles.list}
-        data={DATA}
-        keyExtractor={(item) => item.text}
-        renderItem={({ item }) => <Item text={item.text} iconSrc={item.icon} />}
+        data={items}
+        keyExtractor={(item, index) => item.text+index}
+        renderItem={({ item, index }) => <Item text={item.text} iconSrc={item.icon} onPress={()=>deleteItem(index)}/>}
       />
     </View>
   );
@@ -49,6 +65,11 @@ const styles = StyleSheet.create({
     backgroundColor: "yellow",
     width: "100%",
   },
+  input: {
+    flex: 1,
+    backgroundColor: "white",
+    fontSize: 32,
+  },
   list: {
     flex: 0.9,
     margin: 5,
@@ -59,7 +80,7 @@ const styles = StyleSheet.create({
   sideBySide: {
     flex: 1,
     flexDirection: "row",
-    backgroundColor: "white",
+    // backgroundColor: "white",
     // justifyContent: "center",
     // alignContent:"center",
     // alignItems: "center",

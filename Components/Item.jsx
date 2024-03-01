@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 
-export default function Item({ iconSrc, text }) {
+export default function Item({ iconSrc, text, onPress }) {
   return (
     // <View style={styles.item}>
-      <TouchableOpacity onPress={() => alert(text)} style={styles.item}>
+      <TouchableOpacity onPress={onPress} style={styles.item}>
         <Image source={iconSrc} style={styles.image} />
         <Text style={styles.title}>{text}</Text>
       </TouchableOpacity>
@@ -21,7 +21,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   title: {
+    flex:1,
     fontSize: 32,
+    textAlign: "right"
   },
   image: {
     width: 50,
