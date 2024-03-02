@@ -13,13 +13,14 @@ export default function Todo() {
   const icons = [mango, lemon];
   const [text, setText] = useState("");
   const [items, setItems] = useState(DATA);
+  const [selectedId, setselectedId] = useState(undefined);
   const [iconIndex, setIconIndex] = useState(0);
   const addItem = () => {
     // items.push({text:text});
     if (text) {
       setItems([
         ...items,
-        { text: text, icon: icons[iconIndex], id: text + items.length },
+        { text: text, icon: icons[iconIndex], id: text + items.length, isDone:false },
       ]);
       setIconIndex((iconIndex + 1) % 2);
     }
@@ -47,8 +48,16 @@ export default function Todo() {
       <FlatList
         style={styles.list}
         data={items}
-        keyExtractor={(item, index) => item.text+index}
-        renderItem={({ item, index }) => <Item text={item.text} iconSrc={item.icon} onPress={()=>deleteItem(index)}/>}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item, index }) => (
+          <Item
+            text={item.text}
+            isDone={item.isDone}
+            onPress={() => deleteItem(index)}
+            isSelected={selectedId === item.id}
+            onSelected={() => setselectedId(item.id)}
+          />
+        )}
       />
     </View>
   );
