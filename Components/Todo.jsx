@@ -2,13 +2,21 @@ import { FlatList, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
 import lemon from "../assets/lemon.png";
 import mango from "../assets/mango.png";
-import Item from "./Itemcheckbox";
+import Item from "./Item";
 import MyButton from "./MyButton";
 
 export default function Todo() {
   const DATA = [
-    // { text: "lemon", icon: mango },
-    // { text: "mango", icon: lemon },
+    { text: "1234", icon: lemon },
+    { text: "lemon", icon: mango },
+    { text: "mango", icon: lemon },
+    { text: "456", icon: mango },
+    { text: "Mohamed", icon: lemon },
+    { text: "apple", icon: lemon },
+    { text: "banana", icon: mango },
+    { text: "orange", icon: lemon },
+    { text: "grape", icon: mango },
+    { text: "watermelon", icon: lemon }, 
   ];
   const icons = [mango, lemon];
   const [text, setText] = useState("");
@@ -28,6 +36,10 @@ export default function Todo() {
   const deleteItem = (index) => {
     setItems(items.filter((_, i) => i !== index));
   };
+  const searchItems = (searchFor) => {
+    console.log('searchFor', searchFor);
+    setItems(DATA.filter((item) => item.text.includes(searchFor) ));
+  };  
   return (
     <View style={styles.top}>
       <View style={styles.top1}>
@@ -35,12 +47,12 @@ export default function Todo() {
         <View style={styles.sideBySide}>
           <TextInput
             style={styles.input}
-            placeholder="Enter text"
-            onChangeText={(t) => setText(t)}
+            placeholder="Search for"
+            onChangeText={(t) => {setText(t); searchItems(t)}}
           />
-          <MyButton color="red" onPress={addItem}>
+          <MyButton color="red" onPress={()=>searchItems(text)}>
             {({ pressed }) => (
-              <Text style={styles.text}>{pressed ? "Adding" : "Add item"}</Text>
+              <Text style={styles.text}>{pressed ? "Searching" : "Search"}</Text>
             )}
           </MyButton>
         </View>
@@ -52,6 +64,7 @@ export default function Todo() {
         renderItem={({ item, index }) => (
           <Item
             text={item.text}
+            iconSrc={item.icon}
             isDone={item.isDone}
             onPress={() => deleteItem(index)}
             isSelected={selectedId === item.id}
