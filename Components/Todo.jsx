@@ -5,7 +5,7 @@ import mango from "../assets/mango.png";
 import Item from "./Item";
 import MyButton from "./MyButton";
 
-export default Todo = () => {
+export default function Todo () {
   const DATA = [
     // { text: "lemon", icon: mango },
     // { text: "mango", icon: lemon },
@@ -16,8 +16,10 @@ export default Todo = () => {
   const [iconIndex, setIconIndex] = useState(0);
   const addItem = () => {
     // items.push({text:text});
-    setItems([...items, { text: text, icon: icons[iconIndex] }]);
-    setIconIndex((iconIndex + 1) % 2);
+    if (text) {
+      setItems([...items, { text: text, icon: icons[iconIndex] }]);
+      setIconIndex((iconIndex + 1) % 2);
+    }
   };
   const deleteItem = (index) => {
     setItems(items.filter((_, i) => i !== index));
