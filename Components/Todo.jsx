@@ -7,8 +7,8 @@ import MyButton from "./MyButton";
 
 export default Todo = () => {
   const DATA = [
-    { text: "lemon", icon: mango },
-    { text: "mango", icon: lemon },
+    // { text: "lemon", icon: mango },
+    // { text: "mango", icon: lemon },
   ];
   const icons = [mango, lemon];
   const [text, setText] = useState("");
