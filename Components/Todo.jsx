@@ -2,10 +2,10 @@ import { FlatList, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
 import lemon from "../assets/lemon.png";
 import mango from "../assets/mango.png";
-import Item from "./Item";
+import Item from "./Itemcheckbox";
 import MyButton from "./MyButton";
 
-export default function Todo () {
+export default function Todo() {
   const DATA = [
     // { text: "lemon", icon: mango },
     // { text: "mango", icon: lemon },
@@ -17,7 +17,10 @@ export default function Todo () {
   const addItem = () => {
     // items.push({text:text});
     if (text) {
-      setItems([...items, { text: text, icon: icons[iconIndex] }]);
+      setItems([
+        ...items,
+        { text: text, icon: icons[iconIndex], id: text + items.length },
+      ]);
       setIconIndex((iconIndex + 1) % 2);
     }
   };
@@ -36,9 +39,7 @@ export default function Todo () {
           />
           <MyButton color="red" onPress={addItem}>
             {({ pressed }) => (
-              <Text style={styles.text}>
-                {pressed ? "Adding" : "Add item"}
-              </Text>
+              <Text style={styles.text}>{pressed ? "Adding" : "Add item"}</Text>
             )}
           </MyButton>
         </View>
@@ -51,7 +52,7 @@ export default function Todo () {
       />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   top: {
