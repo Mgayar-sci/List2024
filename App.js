@@ -3,29 +3,12 @@ import {
   StyleSheet,
   SafeAreaView,
 } from "react-native";
-import Todo from "./Components/Todo";
+import Users from "./Components/Users";
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      {/* <View style={styles.sideBySide}>
-        <Button
-          title="previous component"
-          onPress={() =>
-            setVisibleComponent(
-              (v) => (v - 1 + compArray.length) % compArray.length
-            )
-          }
-        />
-        <Button
-          title="Next component"
-          onPress={() => setVisibleComponent((v) => (v + 1) % compArray.length)}
-        />
-      </View>
-      <View style={styles.component}>
-        <Comp />
-      </View> */}
-      <Todo/>
+      <Users/>
       <StatusBar style="auto" />
     </SafeAreaView>
   );
