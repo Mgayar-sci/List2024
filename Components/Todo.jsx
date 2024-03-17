@@ -60,7 +60,7 @@ export default function Todo() {
       <FlatList
         style={styles.list}
         data={items}
-        keyExtractor={(item) => item.id}
+        // keyExtractor={(item) => item.id}
         renderItem={({ item, index }) => (
           <Item
             text={item.text}
